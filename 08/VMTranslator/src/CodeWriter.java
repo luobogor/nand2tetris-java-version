@@ -31,6 +31,12 @@ public class CodeWriter {
         this.fileName = fileName;
     }
 
+    public void writeBreakPoint() {
+        write("@7777");
+        write("M=1");
+        write("M=0");
+    }
+
     public void writeArithmetic(String command) {
         try {
             bw.newLine();
@@ -65,8 +71,10 @@ public class CodeWriter {
                 case "lt":
                     bw.write("//lt");
                     bw.newLine();
+                    //writeBreakPoint();
                     binaryOperation1("-");
                     binaryOperation2("<");
+                    //writeBreakPoint();
                     break;
                 case "and":
                     bw.write("//and");
@@ -161,6 +169,7 @@ public class CodeWriter {
         DEX(256);
         write("@SP");
         write("M=D");
+//        ////writeBreakPoint();
         writeCall("Sys.init", 0);
     }
 
@@ -187,7 +196,7 @@ public class CodeWriter {
             DEAP("SP");
             bw.write("@" + this.functionName+"$"+label);
             bw.newLine();
-            bw.write("D;JGT");
+            bw.write("D;JNE");
             bw.newLine();
         } catch (IOException e) {
             e.printStackTrace();
@@ -260,6 +269,8 @@ public class CodeWriter {
             DEM("SP");
             MED("LCL");
             //goto f
+
+            //writeBreakPoint();
             JMP(functionName);
             //(RETURN_ADDR)
             write(StringUtils.wrapByParenthesis("RETURN_ADDR_" + returnFlag));
@@ -297,7 +308,7 @@ public class CodeWriter {
             MED("SP");
             SPPlusPlus();
 
-//            //SP = ARG + 1
+            //SP = ARG + 1
 //            write("@ARG");
 //            write("D=A+1");
 //            MED("SP");
@@ -314,6 +325,8 @@ public class CodeWriter {
             //LCL = *(frame-4)
             DEAPMinusi("frame", 4);
             MED("LCL");
+
+            //writeBreakPoint();
             //goto retAddr
             write("@retAddr");
             write("A=M");

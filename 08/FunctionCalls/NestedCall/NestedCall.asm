@@ -50,6 +50,9 @@ M=D
 D=M
 @LCL
 M=D
+@7777
+M=1
+M=0
 @Sys.init
 0;JMP
 (RETURN_ADDR_0)
@@ -93,6 +96,9 @@ A=M
 D=M
 @THAT
 M=D
+@7777
+M=1
+M=0
 
 //call Sys.main 0
 @RETURN_ADDR_1
@@ -140,6 +146,9 @@ M=D
 D=M
 @LCL
 M=D
+@7777
+M=1
+M=0
 @Sys.main
 0;JMP
 (RETURN_ADDR_1)
@@ -308,6 +317,9 @@ A=M
 M=D
 @SP
 M=M+1
+@7777
+M=1
+M=0
 
 //call Sys.add12 1
 @RETURN_ADDR_2
@@ -355,6 +367,9 @@ M=D
 D=M
 @LCL
 M=D
+@7777
+M=1
+M=0
 @Sys.add12
 0;JMP
 (RETURN_ADDR_2)
@@ -479,6 +494,9 @@ A=M
 M=M+D
 @SP
 M=M+1
+@7777
+M=1
+M=0
 
 //return
 @LCL
@@ -501,9 +519,11 @@ D=M
 A=M
 M=D
 @ARG
-D=A+1
+D=M
 @SP
 M=D
+@SP
+M=M+1
 @frame
 D=M
 @1
@@ -532,6 +552,9 @@ A=D-A
 D=M
 @LCL
 M=D
+@7777
+M=1
+M=0
 @retAddr
 A=M
 0;JMP
@@ -609,6 +632,9 @@ A=M
 M=M+D
 @SP
 M=M+1
+@7777
+M=1
+M=0
 
 //return
 @LCL
@@ -631,9 +657,11 @@ D=M
 A=M
 M=D
 @ARG
-D=A+1
+D=M
 @SP
 M=D
+@SP
+M=M+1
 @frame
 D=M
 @1
@@ -662,6 +690,9 @@ A=D-A
 D=M
 @LCL
 M=D
+@7777
+M=1
+M=0
 @retAddr
 A=M
 0;JMP

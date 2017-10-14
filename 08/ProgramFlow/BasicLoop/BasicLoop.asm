@@ -23,8 +23,9 @@ D=M
 @addr
 A=M
 M=D
+
 //label LOOP_START
-(LOOP_START)
+($LOOP_START)
 
 //push argument 0
 @ARG
@@ -147,7 +148,7 @@ M=M-1
 @SP
 A=M
 D=M
-@LOOP_START
+@$LOOP_START
 D;JGT
 
 //push local 0
@@ -161,8 +162,3 @@ A=M
 M=D
 @SP
 M=M+1
-
-//end
-(END)
-@END
-0;JMP

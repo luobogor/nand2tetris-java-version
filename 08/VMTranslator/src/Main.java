@@ -17,7 +17,6 @@ public class Main {
             codeWriter.setFileName(parser.getFileName());
             while (parser.hasMoreCommands()) {
                 parser.advance();
-//                codeWriter.writeBreakPoint();
                 switch (parser.commandType()) {
                     case C_ARITHMETIC:
                         codeWriter.writeArithmetic(parser.arg1());
@@ -41,11 +40,12 @@ public class Main {
                         codeWriter.writeFunction(parser.arg1(), parser.arg2());
                         break;
                     case C_RETURN:
-//                        codeWriter.writeBreakPoint();
+                        //codeWriter.writeBreakPoint();
+                        //codeWriter.writeBreakPoint()用于打断点调试
                         codeWriter.writeReturn();
                         break;
                     case C_CALL:
-//                        codeWriter.writeBreakPoint();
+                        //codeWriter.writeBreakPoint();
                         codeWriter.writeCall(parser.arg1(), parser.arg2());
                         break;
                     default:
