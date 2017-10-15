@@ -1,8 +1,11 @@
 import myenum.TokenType;
 import utils.NumberUtils;
+import utils.StringUtils;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import static myenum.StringEnum.keywords;
 import static myenum.StringEnum.symbols;
 import static myenum.TokenType.*;
@@ -12,7 +15,8 @@ public class JackTokenizer {
     private List<String> tokens;
     private int pointer;
     private String thisToken;
-//    private String fileName;
+    private String fileName;
+    private String filePath;
 
     public JackTokenizer() {
     }
@@ -23,24 +27,22 @@ public class JackTokenizer {
         String line;
         try {
             BufferedReader in = new BufferedReader(new FileReader(filePath));
-//            File file = new File(filePath);
-//            String tempFileName = file.getName();
-//            this.fileName = tempFileName.substring(0, tempFileName.lastIndexOf('.'));
+            this.filePath = filePath;
+            File file = new File(filePath);
+            String tempFileName = file.getName();
+            this.fileName = tempFileName.substring(0, tempFileName.lastIndexOf('.'));
             line = in.readLine();
             boolean isMuilLineNeglect = false;
             while (line != null) {
                 line = line.trim();
                 System.out.println(line);
-                if (line.equals("") || isMuilLineNeglect || line.startsWith("//")) {
-                    line = in.readLine();
-                    continue;
-                }
 
+                //删除注释
                 if (line.startsWith("/*") && !line.endsWith("*/")) {
                     isMuilLineNeglect = true;
                     line = in.readLine();
                     continue;
-                } else if (!line.startsWith("/*") && line.endsWith("*/")) {
+                } else if (line.endsWith("*/") || line.startsWith("*/")) {
                     isMuilLineNeglect = false;
                     line = in.readLine();
                     continue;
@@ -48,11 +50,29 @@ public class JackTokenizer {
                     line = in.readLine();
                     continue;
                 }
-                String[] statement = line.split("//")[0].trim().split(" ");
-                for (int i = 0; i < statement.length; i++) {
-                    List<String> thisLineTokes = new ArrayList<>();
-                    splitToToken(statement[i],thisLineTokes);
-                    tokens.addAll(thisLineTokes);
+
+                if (line.equals("") || isMuilLineNeglect || line.startsWith("//")) {
+                    line = in.readLine();
+                    continue;
+                }
+                //
+
+                String[] segment = line.split("//")[0].trim().split("\"");
+                boolean even = true;
+                for (int i = 0; i < segment.length; i++) {
+                    String statement = segment[i];
+                    if (even) {
+                        String[] words = statement.split(" ");
+                        for (int j = 0; j <words.length; j++) {
+                            List<String> thisLineTokes = new ArrayList<>();
+                            splitToToken(words[j], thisLineTokes);
+                            tokens.addAll(thisLineTokes);
+                        }
+                        even = false;
+                    } else {
+                        tokens.add(StringUtils.wrapByDoubleQuotation(statement));
+                        even = true;
+                    }
                 }
                 line = in.readLine();
             }
@@ -63,20 +83,31 @@ public class JackTokenizer {
         }
     }
 
-    private void splitToToken(String word,List<String> tokens) {
-        if (!symbols.contains(word)) {
+    private void splitToToken(String word, List<String> tokens) {
+        if (word == null || word.isEmpty()) {
+            return;
+        }
+        if (word.length() == 1) {
             tokens.add(word);
             return;
         }
+        boolean isContainSymbol = false;
+
         for (int i = 0; i < symbols.size(); i++) {
             String symbol = symbols.get(i);
             if (word.contains(symbol)) {
+                isContainSymbol = true;
                 int symbolIdx = word.indexOf(symbol);
-                splitToToken(word.substring(symbolIdx),tokens);
+                splitToToken(word.substring(0, symbolIdx), tokens);
                 tokens.add(symbol);
-                splitToToken(word.substring(symbolIdx + 1, word.length()),tokens);
-                return;
+                if (symbolIdx + 1 < word.length()) {
+                    splitToToken(word.substring(symbolIdx + 1, word.length()), tokens);
+                }
+                break;
             }
+        }
+        if (!isContainSymbol) {
+            tokens.add(word);
         }
     }
 
@@ -84,7 +115,6 @@ public class JackTokenizer {
         pointer++;
         this.thisToken = tokens.get(pointer);
     }
-
 
 
     public Boolean hasMoreTokens() {
@@ -114,7 +144,19 @@ public class JackTokenizer {
     }
 
     public String symbol() {
-        return getThisToken();
+        String token = thisToken;
+        switch (thisToken) {
+            case ">":
+                token = "&gt;";
+                break;
+            case "<":
+                token = "&lt;";
+                break;
+            case "&":
+                token = "&amp;";
+                break;
+        }
+        return token;
     }
 
     public String identifier() {
@@ -136,9 +178,12 @@ public class JackTokenizer {
     public String getThisToken() {
         return thisToken;
     }
-//
-//    public String getFileName() {
-//        return fileName;
-//    }
 
+    public String getFileName() {
+        return fileName;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
 }

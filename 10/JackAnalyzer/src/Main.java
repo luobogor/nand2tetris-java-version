@@ -2,53 +2,45 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static utils.StringUtils.*;
+
 public class Main {
     static List<JackTokenizer> jackTokenizerList = new ArrayList<>();
 
     public static void main(String[] args) {
         String filePath = args[0];
-        traverseFolder(args[0]);
-//        CodeWriter codeWriter = new CodeWriter(args[0]);
+        traverseFolder(filePath);
         for (JackTokenizer jackTokenizer : jackTokenizerList) {
-//            codeWriter.setFileName(jackTokenizer.getFileName());
+            CompilationEngine compilationEngine = new CompilationEngine(jackTokenizer.getFilePath());
             while (jackTokenizer.hasMoreTokens()) {
                 jackTokenizer.advance();
-//                switch (jackTokenizer.commandType()) {
-//                    case C_ARITHMETIC:
-//                        codeWriter.writeArithmetic(jackTokenizer.arg1());
-//                        break;
-//                    case C_PUSH:
-//                        codeWriter.writePushPop(JackTokenizer.CommandType.C_PUSH, jackTokenizer.arg1(), jackTokenizer.arg2());
-//                        break;
-//                    case C_POP:
-//                        codeWriter.writePushPop(JackTokenizer.CommandType.C_POP, jackTokenizer.arg1(), jackTokenizer.arg2());
-//                        break;
-//                    case C_LABEL:
-//                        codeWriter.writeLabel(jackTokenizer.arg1());
-//                        break;
-//                    case C_GOTO:
-//                        codeWriter.writeGoto(jackTokenizer.arg1());
-//                        break;
-//                    case C_IF:
-//                        codeWriter.writeIf(jackTokenizer.arg1());
-//                        break;
-//                    case C_FUNCTION:
-//                        codeWriter.writeFunction(jackTokenizer.arg1(), jackTokenizer.arg2());
-//                        break;
-//                    case C_RETURN:
-//                        codeWriter.writeReturn();
-//                        break;
-//                    case C_CALL:
-//                        codeWriter.writeCall(jackTokenizer.arg1(), jackTokenizer.arg2());
-//                        break;
-//                    default:
-//                        String tips = jackTokenizer.getFileName() + "  " + jackTokenizer.getThisToken() + "命令异常";
-//                        throw new RuntimeException(tips);
-//                }
+                //option + enter 生成条件
+                switch (jackTokenizer.tokenType()) {
+                    case KEYWORD:
+                        compilationEngine.outPut(wrapByKeyword(jackTokenizer.keyword()));
+                        break;
+                    case SYBOL:
+                        compilationEngine.outPut(wrapBySymbol(jackTokenizer.symbol()));
+                        break;
+                    case IDENTIFIER:
+                        compilationEngine.outPut(wrapByIdentifier(jackTokenizer.identifier()));
+                        break;
+                    case INT_CONSTANT:
+                        compilationEngine.outPut(wrapByIntegerConstant(String.valueOf(jackTokenizer.intVal())));
+                        break;
+                    case STRING_CONSTANT:
+                        compilationEngine.outPut(wrapByStringConstant(jackTokenizer.stringVal()));
+                        break;
+                    default:
+                        String tips = jackTokenizer.getFileName() + "  " + jackTokenizer.getThisToken() + " unknown token";
+                        throw new RuntimeException(tips);
+                }
             }
+            compilationEngine.close();
         }
-//        codeWriter.close();
     }
+
+
 
     public static void traverseFolder(String path) {
         File file = new File(path);
@@ -67,7 +59,7 @@ public class Main {
             } else {
                 for (File item : files) {
                     String filePath = item.getAbsolutePath();
-                    if (filePath.endsWith(".vm")) {
+                    if (filePath.endsWith(".jack")) {
                         JackTokenizer jackTokenizer = new JackTokenizer(filePath);
                         jackTokenizerList.add(jackTokenizer);
                     }
