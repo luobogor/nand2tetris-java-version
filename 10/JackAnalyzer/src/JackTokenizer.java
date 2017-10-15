@@ -17,6 +17,7 @@ public class JackTokenizer {
     private String thisToken;
     private String fileName;
     private String filePath;
+    private final String BLANK = " ";
 
     public JackTokenizer() {
     }
@@ -62,7 +63,7 @@ public class JackTokenizer {
                 for (int i = 0; i < segment.length; i++) {
                     String statement = segment[i];
                     if (even) {
-                        String[] words = statement.split(" ");
+                        String[] words = statement.split(BLANK);
                         for (int j = 0; j <words.length; j++) {
                             List<String> thisLineTokes = new ArrayList<>();
                             splitToToken(words[j], thisLineTokes);
@@ -126,7 +127,7 @@ public class JackTokenizer {
         if (keywords.contains(thisToken)) {
             return KEYWORD;
         } else if (symbols.contains(thisToken)) {
-            return SYBOL;
+            return SYMBOL;
         } else if (NumberUtils.isNumeric(thisToken)) {
             return INT_CONSTANT;
         } else if (thisToken.startsWith("\"") && thisToken.endsWith("\"")) {
@@ -140,10 +141,16 @@ public class JackTokenizer {
     }
 
     public String keyword() {
+        if (tokenType()!=KEYWORD) {
+            throw new RuntimeException("only when type of token is 'KEYWORD' can keyword()");
+        }
         return getThisToken();
     }
 
     public String symbol() {
+        if (tokenType()!=SYMBOL) {
+            throw new RuntimeException("only when type of token is 'SYMBOL' can symbol()");
+        }
         String token = thisToken;
         switch (thisToken) {
             case ">":
@@ -160,14 +167,23 @@ public class JackTokenizer {
     }
 
     public String identifier() {
+        if (tokenType()!=IDENTIFIER) {
+            throw new RuntimeException("only when type of token is 'IDENTIFIER' can identifier()");
+        }
         return getThisToken();
     }
 
     public int intVal() {
+        if (tokenType()!=INT_CONSTANT) {
+            throw new RuntimeException("only when type of token is 'INT_CONSTANT' can intVal()");
+        }
         return Integer.parseInt(getThisToken());
     }
 
     public String stringVal() {
+        if (tokenType()!=STRING_CONSTANT) {
+            throw new RuntimeException("only when type of token is 'STRING_CONSTANT' can stringVal()");
+        }
         return getThisToken().replace("\"", "");
     }
 

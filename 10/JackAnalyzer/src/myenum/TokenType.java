@@ -2,7 +2,7 @@ package myenum;
 
 public enum  TokenType {
     KEYWORD,
-    SYBOL,
+    SYMBOL,
     IDENTIFIER,
     INT_CONSTANT,
     STRING_CONSTANT
