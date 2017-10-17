@@ -9,6 +9,9 @@ public class JackAnalyzer {
         String filePath = args[0];
         traverseFolder(filePath);
         for (JackTokenizer jackTokenizer : jackTokenizerList) {
+            //generate T.xml
+            //new CompilationEngine(jackTokenizer,"");
+            jackTokenizer.initPointer();
             new CompilationEngine(jackTokenizer);
         }
     }

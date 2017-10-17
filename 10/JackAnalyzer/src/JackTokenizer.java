@@ -6,8 +6,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static myenum.StringEnum.keywords;
-import static myenum.StringEnum.symbols;
+import static myenum.StringEnum.*;
+import static myenum.StringEnum.KEYWORD_FIELD;
+import static myenum.StringEnum.KEYWORD_STATIC;
 import static myenum.TokenType.*;
 
 public class JackTokenizer {
@@ -64,7 +65,7 @@ public class JackTokenizer {
                     String statement = segment[i];
                     if (even) {
                         String[] words = statement.split(BLANK);
-                        for (int j = 0; j <words.length; j++) {
+                        for (int j = 0; j < words.length; j++) {
                             List<String> thisLineTokes = new ArrayList<>();
                             splitToToken(words[j], thisLineTokes);
                             tokens.addAll(thisLineTokes);
@@ -141,14 +142,14 @@ public class JackTokenizer {
     }
 
     public String keyword() {
-        if (tokenType()!=KEYWORD) {
+        if (tokenType() != KEYWORD) {
             throw new RuntimeException("only when type of token is 'KEYWORD' can keyword()");
         }
         return getThisToken();
     }
 
     public String symbol() {
-        if (tokenType()!=SYMBOL) {
+        if (tokenType() != SYMBOL) {
             throw new RuntimeException("only when type of token is 'SYMBOL' can symbol()");
         }
         String token = thisToken;
@@ -167,21 +168,21 @@ public class JackTokenizer {
     }
 
     public String identifier() {
-        if (tokenType()!=IDENTIFIER) {
+        if (tokenType() != IDENTIFIER) {
             throw new RuntimeException("only when type of token is 'IDENTIFIER' can identifier()");
         }
         return getThisToken();
     }
 
     public int intVal() {
-        if (tokenType()!=INT_CONSTANT) {
+        if (tokenType() != INT_CONSTANT) {
             throw new RuntimeException("only when type of token is 'INT_CONSTANT' can intVal()");
         }
         return Integer.parseInt(getThisToken());
     }
 
     public String stringVal() {
-        if (tokenType()!=STRING_CONSTANT) {
+        if (tokenType() != STRING_CONSTANT) {
             throw new RuntimeException("only when type of token is 'STRING_CONSTANT' can stringVal()");
         }
         return getThisToken().replace("\"", "");
@@ -201,5 +202,72 @@ public class JackTokenizer {
 
     public String getFilePath() {
         return filePath;
+    }
+
+
+    public boolean isFunKeyword() {
+        if (thisToken.equals(KEYWORD_CONSTRUCTOR) ||
+                thisToken.equals(KEYWORD_FUNCTION) ||
+                thisToken.equals(KEYWORD_METHOD)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isPrimitiveType() {
+        if (thisToken.equals(KEYWORD_INT) ||
+                thisToken.equals(KEYWORD_CHAR) ||
+                thisToken.equals(KEYWORD_BOOLEAN)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isStatement() {
+        if (tokenType() == TokenType.KEYWORD &&
+                (thisToken.equals(KEYWORD_LET) ||
+                        thisToken.equals(KEYWORD_IF) ||
+                        thisToken.equals(KEYWORD_WHILE) ||
+                        thisToken.equals(KEYWORD_DO) ||
+                        thisToken.equals(KEYWORD_RETURN))) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isClassVarType() {
+        if (thisToken.equals(KEYWORD_FIELD) ||
+                thisToken.equals(KEYWORD_STATIC)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isOp() {
+        if (tokenType() == TokenType.SYMBOL) {
+            switch (thisToken) {
+                case "+":
+                case "-":
+                case "*":
+                case "/":
+                case "&":
+                case "|":
+                case "<":
+                case ">":
+                case "=":
+                    return true;
+                default:
+                    return false;
+            }
+        }
+        return false;
+    }
+
+    public boolean isunaryOp() {
+        if (tokenType() == TokenType.SYMBOL &&
+                (thisToken.equals("-") || thisToken.equals("~"))) {
+            return true;
+        }
+        return false;
     }
 }

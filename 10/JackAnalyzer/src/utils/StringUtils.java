@@ -8,7 +8,7 @@ public class StringUtils {
         return "\"" + str + "\"";
     }
 
-    public static String wrapByKeyword(String str) {
+    public static String wrapByKeywordTag(String str) {
         return wrapByTag(str, "keyword");
     }
 
