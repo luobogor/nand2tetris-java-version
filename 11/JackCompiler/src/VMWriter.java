@@ -63,23 +63,33 @@ public class VMWriter {
             case "~":
                 write(NOT);
                 break;
+            default:
+                throw new RuntimeException("not exist arithmetic symbol " + command);
         }
     }
 
     public void writeLabel(String label) {
-        write(wrapByParenthesis(label));
+        write("label " + label);
     }
 
 
     public void writeCall(String name, int nArgs) {
         //call f n
         //在n个参数被压入栈之后调用f函数
-        write("call "+name + " " + String.valueOf(nArgs));
+        write("call " + name + " " + String.valueOf(nArgs));
     }
 
     public void writeFunction(String name, int nArgs) {
         //function className.funName nArgs
         write("function " + className + "." + name + " " + String.valueOf(nArgs));
+    }
+
+    public void writeIf(String label) {
+        write("if-goto " + label);
+    }
+
+    public void writeGoto(String label) {
+        write("goto " + label);
     }
 
     public void writeReturn() {

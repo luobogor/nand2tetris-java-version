@@ -27,7 +27,6 @@ public class SymbolTable {
 
     public void startSubroutine() {
         subroutineSymbols.clear();
-        fieldNum = 0;
         argNum = 0;
         varNum = 0;
     }
@@ -41,10 +40,10 @@ public class SymbolTable {
                 classSymbols.put(name, new Symbol(name, type, Kind.FIELD, fieldNum++));
                 break;
             case "arg":
-                classSymbols.put(name, new Symbol(name, type, Kind.ARG, argNum++));
+                subroutineSymbols.put(name, new Symbol(name, type, Kind.ARG, argNum++));
                 break;
             case "var":
-                classSymbols.put(name, new Symbol(name, type, Kind.VAR, varNum++));
+                subroutineSymbols.put(name, new Symbol(name, type, Kind.VAR, varNum++));
                 break;
         }
     }
