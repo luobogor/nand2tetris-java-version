@@ -1,6 +1,7 @@
 import domain.Kind;
 import domain.TokenType;
 import domain.VMEnum;
+import sun.misc.VM;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -223,11 +224,11 @@ public class CompilationEngine {
             if (jackTokenizer.tokenType() == TokenType.SYMBOL && jackTokenizer.symbol().equals(")")) {
                 write(wrapBySAB(TAG_PARAMETERLIST));
                 write(wrapByEAB(TAG_PARAMETERLIST));
-            } else if (jackTokenizer.isPrimitiveType()) {
+            } else if (jackTokenizer.isPrimitiveType() || jackTokenizer.tokenType()==TokenType.IDENTIFIER) {
                 compileParameterList();
                 //返回后当前token必定是')'
             } else {
-                throw new RuntimeException("expect primitive type or empty string to declare paramList");
+                throw new RuntimeException("expect primitive type or identify or empty string to declare paramList");
             }
             // ')'
             write(wrapBySymbolTag(jackTokenizer.symbol()));
@@ -242,9 +243,16 @@ public class CompilationEngine {
 
     private void compileParameterList() {
         write(wrapBySAB(TAG_PARAMETERLIST));
-        //primitive type
-        write(wrapByKeywordTag(jackTokenizer.keyword()));
-        String type = jackTokenizer.keyword();
+        String type;
+        //arg type
+        if (jackTokenizer.tokenType() == TokenType.KEYWORD) {
+            write(wrapByKeywordTag(jackTokenizer.keyword()));
+            type = jackTokenizer.keyword();
+        } else {
+            write(wrapByIdentifierTag(jackTokenizer.identifier()));
+            type = jackTokenizer.identifier();
+        }
+
 
         //identifier
         advance();
@@ -402,10 +410,6 @@ public class CompilationEngine {
              * add
              * */
             vmWriter.writeArithmetic("+");
-            /**
-             * pop pointer 1
-             * */
-            vmWriter.writePop(VMEnum.POINTER, 1);
         } else if (jackTokenizer.tokenType() != TokenType.SYMBOL || (jackTokenizer.tokenType() == TokenType.SYMBOL &&
                 !jackTokenizer.symbol().equals("="))) {
             throw new RuntimeException("expect '=' to declare let statement");
@@ -428,14 +432,17 @@ public class CompilationEngine {
          * */
         switch (symbolTable.kindOf(name)) {
             case ARG:
-                vmWriter.writePop(VMEnum.ARG, symbolTable.indexOf(name));
+                if (!isArray) {
+                    vmWriter.writePop(VMEnum.ARG, symbolTable.indexOf(name));
+                } else {
+                    handleArray();
+                }
                 break;
             case VAR:
                 if (!isArray) {
                     vmWriter.writePop(VMEnum.LOCAL, symbolTable.indexOf(name));
                 } else {
-                    //only use that 0 to store
-                    vmWriter.writePop(VMEnum.THAT, 0);
+                    handleArray();
                 }
                 break;
             case NONE:
@@ -449,7 +456,7 @@ public class CompilationEngine {
                         if (!isArray) {
                             vmWriter.writePop(VMEnum.THIS, symbolTable.indexOf(name));
                         } else {
-                            vmWriter.writePop(VMEnum.THAT, 0);
+                            handleArray();
                         }
                         break;
                     case NONE:
@@ -463,7 +470,11 @@ public class CompilationEngine {
 
     private void pushVar(String name) {
         if (symbolTable.kindOf(name) != Kind.NONE) {
-            vmWriter.writePush(VMEnum.LOCAL, symbolTable.indexOf(name));
+            if (symbolTable.kindOf(name)==Kind.ARG) {
+                vmWriter.writePush(VMEnum.ARG, symbolTable.indexOf(name));
+            } else if (symbolTable.kindOf(name) == Kind.VAR) {
+                vmWriter.writePush(VMEnum.LOCAL, symbolTable.indexOf(name));
+            }
         } else {
             symbolTable.localAtClassScope();
             if (symbolTable.kindOf(name) != Kind.NONE) {
@@ -514,7 +525,9 @@ public class CompilationEngine {
             /**
              *call xxx nArgs
              * */
-            vmWriter.writeCall(this.thisClassName + "." + nameLv1, nArgs + 1);
+            if (!this.thisFunType.equals(KEYWORD_FUNCTION)) {
+                vmWriter.writeCall(this.thisClassName + "." + nameLv1, nArgs + 1);
+            }
         } else if (jackTokenizer.symbol().equals(".")) {
             //subroutineName
             advance();
@@ -525,16 +538,7 @@ public class CompilationEngine {
             /**
              * push obj
              * */
-            if (symbolTable.kindOf(nameLv1) != Kind.NONE) {
-                vmWriter.writePush(VMEnum.LOCAL, symbolTable.indexOf(nameLv1));
-            } else {
-                symbolTable.localAtClassScope();
-                if (symbolTable.kindOf(nameLv1) != Kind.NONE) {
-                    //classLevel variable
-                    vmWriter.writePush(VMEnum.THIS, symbolTable.indexOf(nameLv1));
-                }
-                symbolTable.localAtSubroutineScope();
-            }
+            pushObj(nameLv1);
 
             //'('
             advance();
@@ -548,24 +552,11 @@ public class CompilationEngine {
             } else {
                 nArgs = compileExpressionList();
             }
-
-
             /**
              *call xxx.xxx nArgs
              * */
-            if (symbolTable.kindOf(nameLv1) != Kind.NONE) {
-                vmWriter.writeCall(symbolTable.typeOf(nameLv1) + "." + nameLv2, nArgs + 1);
-            } else {
-                symbolTable.localAtClassScope();
-                if (symbolTable.kindOf(nameLv1) != Kind.NONE) {
-                    //call classLevel variable.method
-                    vmWriter.writeCall(symbolTable.typeOf(nameLv1) + "." + nameLv2, nArgs + 1);
-                } else {
-                    //系统API | 当前文件类名 | 外部类名 不需要传递this
-                    vmWriter.writeCall(nameLv1 + "." + nameLv2, nArgs);
-                }
-                symbolTable.localAtSubroutineScope();
-            }
+            call(nameLv1, nameLv2, nArgs);
+            //setBreakPoint();
         } else {
             throw new RuntimeException("'doStatement' compile error");
         }
@@ -725,7 +716,7 @@ public class CompilationEngine {
 
         advance();
         boolean isElse = false;
-        if (jackTokenizer.keyword().equals("else")) {
+        if (jackTokenizer.tokenType()==TokenType.KEYWORD && jackTokenizer.keyword().equals("else")) {
             isElse = true;
             //'else'
             write(wrapByKeywordTag(jackTokenizer.keyword()));
@@ -893,6 +884,21 @@ public class CompilationEngine {
                     write(wrapBySymbolTag(jackTokenizer.symbol()));
 
                     if (jackTokenizer.symbol().equals("(")) {
+                        //subroutineCall
+                        //eg xxx()
+                        //invoke function | method
+                        if (this.thisFunType.equals(KEYWORD_CONSTRUCTOR)) {
+                            //case: constructor invoke method
+                            vmWriter.writePush(VMEnum.POINTER, 0);
+                        } else if (thisFunType.equals(KEYWORD_METHOD)) {
+                            //case: method invoke method
+                            /**
+                             * push obj
+                             * */
+                            vmWriter.writePush(VMEnum.ARG, 0);
+                        }
+
+                        int nArgs = 0;
                         //expressionList
                         advance();
                         if (jackTokenizer.tokenType() == TokenType.SYMBOL && jackTokenizer.symbol().equals(")")) {
@@ -900,8 +906,16 @@ public class CompilationEngine {
                             write(wrapByEAB(TAG_EXPRESSIONLIST));
                             advance();
                         } else {
-                            compileExpressionList();
+                            nArgs = compileExpressionList();
                         }
+
+                        /**
+                         *call xxx nArgs
+                         * */
+                        if (!this.thisFunType.equals(KEYWORD_FUNCTION)) {
+                            vmWriter.writeCall(this.thisClassName + "." + nameLv1, nArgs + 1);
+                        }
+
                     } else if (jackTokenizer.symbol().equals(".")) {
                         //subroutineName
                         advance();
@@ -918,9 +932,10 @@ public class CompilationEngine {
                         /**
                          * push obj
                          * */
-                        if (symbolTable.kindOf(nameLv1) != Kind.NONE) {
-                            vmWriter.writePush(VMEnum.LOCAL, symbolTable.indexOf(nameLv1));
-                        }
+//                        if (symbolTable.kindOf(nameLv1) != Kind.NONE) {
+//                            vmWriter.writePush(VMEnum.LOCAL, symbolTable.indexOf(nameLv1));
+//                        }
+                        pushObj(nameLv1);
 
                         if (jackTokenizer.tokenType() == TokenType.SYMBOL && jackTokenizer.symbol().equals(")")) {
                             write(wrapBySAB(TAG_EXPRESSIONLIST));
@@ -931,16 +946,12 @@ public class CompilationEngine {
                         //')'
                         write(wrapBySymbolTag(jackTokenizer.symbol()));
                         advance();
+
+
                         /**
-                         *
-                         * call xxx.xxx nArgs
+                         *call xxx.xxx nArgs
                          * */
-                        if (symbolTable.kindOf(nameLv1) == Kind.NONE) {
-                            //系统API | 当前文件类名 | 外部类名 不需要传递this
-                            vmWriter.writeCall(nameLv1 + "." + nameLv2, nArgs);
-                        } else {
-                            vmWriter.writeCall(symbolTable.typeOf(nameLv1) + "." + nameLv2, nArgs + 1);
-                        }
+                        call(nameLv1, nameLv2, nArgs);
                     }
                 } else if (jackTokenizer.tokenType() == TokenType.SYMBOL && jackTokenizer.symbol().equals("[")) {
                     onlyIsVarName = false;
@@ -1025,5 +1036,49 @@ public class CompilationEngine {
         }
     }
 
+    private void call(String nameLv1,String nameLv2,int nArgs) {
+        /**
+         *call xxx.xxx nArgs
+         * */
+        if (symbolTable.kindOf(nameLv1) != Kind.NONE) {
+            vmWriter.writeCall(symbolTable.typeOf(nameLv1) + "." + nameLv2, nArgs + 1);
+        } else {
+            symbolTable.localAtClassScope();
+            if (symbolTable.kindOf(nameLv1) != Kind.NONE) {
+                //call classLevel variable.method
+                vmWriter.writeCall(symbolTable.typeOf(nameLv1) + "." + nameLv2, nArgs + 1);
+            } else {
+                //系统API | 当前文件类名 | 外部类名 不需要传递this
+                vmWriter.writeCall(nameLv1 + "." + nameLv2, nArgs);
+            }
+            symbolTable.localAtSubroutineScope();
+        }
+    }
 
+    private void setBreakPoint() {
+        vmWriter.writePush(VMEnum.CONST, 1);
+        vmWriter.writePop(VMEnum.TEMP,7);
+        vmWriter.writePush(VMEnum.CONST, 0);
+        vmWriter.writePop(VMEnum.TEMP,7);
+    }
+
+    private void pushObj(String nameLv1) {
+        if (symbolTable.kindOf(nameLv1) != Kind.NONE) {
+            vmWriter.writePush(VMEnum.LOCAL, symbolTable.indexOf(nameLv1));
+        } else {
+            symbolTable.localAtClassScope();
+            if (symbolTable.kindOf(nameLv1) != Kind.NONE) {
+                //classLevel variable
+                vmWriter.writePush(VMEnum.THIS, symbolTable.indexOf(nameLv1));
+            }
+            symbolTable.localAtSubroutineScope();
+        }
+    }
+
+    private void handleArray() {
+        vmWriter.writePop(VMEnum.TEMP, 0);
+        vmWriter.writePop(VMEnum.POINTER,1);
+        vmWriter.writePush(VMEnum.TEMP,0);
+        vmWriter.writePop(VMEnum.THAT, 0);
+    }
 }

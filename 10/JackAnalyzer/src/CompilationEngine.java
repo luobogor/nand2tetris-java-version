@@ -497,7 +497,7 @@ public class CompilationEngine {
         write(wrapBySymbolTag(jackTokenizer.symbol()));
 
         advance();
-        if (jackTokenizer.keyword().equals("else")) {
+        if (jackTokenizer.tokenType()==TokenType.KEYWORD && jackTokenizer.keyword().equals("else")) {
             //'else'
             write(wrapByKeywordTag(jackTokenizer.keyword()));
             //'{'
