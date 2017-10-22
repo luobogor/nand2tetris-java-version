@@ -237,8 +237,12 @@ public class CompilationEngine {
 
     private void compileParameterList() {
         write(wrapBySAB(TAG_PARAMETERLIST));
-        //primitive type
-        write(wrapByKeywordTag(jackTokenizer.keyword()));
+        //arg type
+        if (jackTokenizer.tokenType() == TokenType.KEYWORD) {
+            write(wrapByKeywordTag(jackTokenizer.keyword()));
+        } else {
+            write(wrapByIdentifierTag(jackTokenizer.identifier()));
+        }
 
         //identifier
         advance();
