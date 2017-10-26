@@ -11,30 +11,45 @@
  * string-oriented operations.
  */
 class String {
+    field Array buffer;
+    field int len;
+    field int buffer_len;
 
     /** constructs a new empty string with a maximum length of maxLength
      *  and initial length of 0. */
     constructor String new(int maxLength) {
+        let buffer = Array.new(maxLength);
+        let len = 0;
+        let buffer_len = maxLength;
+        return this;
     }
 
     /** Disposes this string. */
     method void dispose() {
+        do Array.dispose(buffer);
     }
 
     /** Returns the current length of this string. */
     method int length() {
+        return len;
     }
 
     /** Returns the character at the j-th location of this string. */
     method char charAt(int j) {
+       return buffer[i];
     }
 
     /** Sets the character at the j-th location of this string to c. */
     method void setCharAt(int j, char c) {
+        let buffer[j] = c;
+        return ;
     }
 
     /** Appends c to this string's end and returns this string. */
     method String appendChar(char c) {
+        let buffer[len] = c;
+        let len = len + 1;
+        return buffer;
     }
 
     /** Erases the last character from this string. */
@@ -52,13 +67,16 @@ class String {
 
     /** Returns the new line character. */
     function char newLine() {
+        return 128;
     }
 
     /** Returns the backspace character. */
     function char backSpace() {
+        return 129;
     }
 
     /** Returns the double quote (") character. */
     function char doubleQuote() {
+        return 34;
     }
 }

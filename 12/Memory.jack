@@ -9,26 +9,69 @@
  * consists of 32,768 words, each holding a 16-bit binary number.
  */ 
 class Memory {
+    static Array ram;
+    static Array freeList;
+    static Array NO_BLOCK;
+
+    static int LEN;
+    static int NEXT;
 
     /** Initializes the class. */
     function void init() {
+        //RAM init
+        let ram = 0;
+
+        //2048 is the specification heapBase
+        let freeList = 2048;
+        let NO_BLOCK = 16384;
+        let NEXT = 0;
+        let LEN = 1;
+        let freeList[LEN] = 16384-2048;//length
+        let freeList[NEXT] = null;
+        return;
     }
 
     /** Returns the RAM value at the given address. */
     function int peek(int address) {
+        return ram[address];
     }
 
     /** Sets the RAM value at the given address to the given value. */
     function void poke(int address, int value) {
+        let ram[address] = value;
+        return;
     }
 
     /** Finds an available RAM block of the given size and returns
      *  a reference to its base address. */
     function int alloc(int size) {
+        var Array prev,cur;
+
+        let prev = null;
+        let cur = freeList;
+        while(~(cur = null)){
+             if( (cur[LEN] = 0) && ( size = 0) ){
+                 // use entire block alloc 0 words
+                 prev[NEXT] = cur[NEXT];
+                 return cur;
+             }else(prev[LEN] >= (size+2)){
+                let baseAddr = prev+prev[1]+1+(size-1);
+                //length
+                let baseAddr[baseAddr-1] = size;
+                //next
+                let baseAddr[baseAddr-2] = null;
+                return baseAddr;
+            }
+             let prev = cur;
+             let cur = cur[NEXT];
+        }
     }
 
+ 
     /** De-allocates the given object (cast as an array) by making
      *  it available for future allocations. */
     function void deAlloc(Array o) {
+        let freeListTail[0] = o;
+        let freeListTail = freeListTail[0];
     }    
 }

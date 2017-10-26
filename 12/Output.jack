@@ -181,6 +181,7 @@ class Output {
     /** Displays the given character at the cursor location,
      *  and advances the cursor one column forward. */
     function void printChar(char c) {
+
     }
 
     /** displays the given string starting at the cursor location,
