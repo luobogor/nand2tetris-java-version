@@ -2,25 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ebc9b2cf-459b-4583-b2da-3b98c42ae091" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Average/Array.vm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Average/Keyboard.vm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Average/Math.vm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Average/Memory.vm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Average/Output.vm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Average/Screen.vm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Average/String.vm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Average/Sys.vm" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../Nand2tetris note.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Pong/Ball.vm" afterPath="$PROJECT_DIR$/../Pong/Ball.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Pong/Bat.vm" afterPath="$PROJECT_DIR$/../Pong/Bat.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Pong/Main.vm" afterPath="$PROJECT_DIR$/../Pong/Main.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Pong/PongGame.vm" afterPath="$PROJECT_DIR$/../Pong/PongGame.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../12/Array.jack" afterPath="$PROJECT_DIR$/../../12/Array.jack" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../12/Keyboard.jack" afterPath="$PROJECT_DIR$/../../12/Keyboard.jack" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../12/Memory.jack" afterPath="$PROJECT_DIR$/../../12/Memory.jack" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../12/Output.jack" afterPath="$PROJECT_DIR$/../../12/Output.jack" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../12/Screen.jack" afterPath="$PROJECT_DIR$/../../12/Screen.jack" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../12/String.jack" afterPath="$PROJECT_DIR$/../../12/String.jack" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CompilationEngine.java" afterPath="$PROJECT_DIR$/src/CompilationEngine.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../12/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../12/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,7 +16,78 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="JackCompiler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/JackCompiler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="23" column="32" lean-forward="false" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CompilationEngine.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/CompilationEngine.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="143">
+              <caret line="1054" column="39" lean-forward="false" selection-start-line="1054" selection-start-column="39" selection-end-line="1054" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Symbol.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/domain/Symbol.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TokenType.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/domain/TokenType.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="5" column="15" lean-forward="false" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VMEnum.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/domain/VMEnum.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="7" column="45" lean-forward="false" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Kind.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/domain/Kind.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="6" column="12" lean-forward="false" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StringEnum.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/domain/StringEnum.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="17" column="43" lean-forward="false" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -42,15 +98,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>vmWriter</find>
-      <find>push obj</find>
-      <find>push Obj</find>
-      <find>compil</find>
-      <find>compileTEr</find>
-      <find>body</find>
-      <find>compileSubroutineBody</find>
-      <find>compile</find>
-      <find>localAtC</find>
       <find>compileLet</find>
       <find>symbolTable.kindOf(name) != Kind.NONE</find>
       <find>compileDo</find>
@@ -70,8 +117,17 @@
       <find>vmWriter.writePush(VMEnum.STATIC</find>
       <find>THIS</find>
       <find>this</find>
-      <find>compileTerm</find>
       <find>express</find>
+      <find>compileTer</find>
+      <find>char</find>
+      <find>KEYWORD_CHAR</find>
+      <find>Array</find>
+      <find>push arr</find>
+      <find>compileSub</find>
+      <find>function</find>
+      <find>call xx</find>
+      <find>args</find>
+      <find>compileTerm</find>
     </findStrings>
     <replaceStrings>
       <replace>nArgs</replace>
@@ -100,8 +156,8 @@
         <option value="$PROJECT_DIR$/src/domain/Symbol.java" />
         <option value="$PROJECT_DIR$/src/SymbolTable.java" />
         <option value="$PROJECT_DIR$/src/VMWriter.java" />
-        <option value="$PROJECT_DIR$/src/CompilationEngine.java" />
         <option value="$PROJECT_DIR$/src/JackCompiler.java" />
+        <option value="$PROJECT_DIR$/src/CompilationEngine.java" />
       </list>
     </option>
   </component>
@@ -112,8 +168,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="363" />
-    <option name="y" value="121" />
+    <option name="x" value="12" />
+    <option name="y" value="1103" />
     <option name="width" value="1389" />
     <option name="height" value="877" />
   </component>
@@ -135,7 +191,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -158,9 +217,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -310,6 +366,9 @@
       <workItem from="1508988022219" duration="529000" />
       <workItem from="1509004814330" duration="599000" />
       <workItem from="1509013958444" duration="19000" />
+      <workItem from="1509073577844" duration="2037000" />
+      <workItem from="1509096188277" duration="236000" />
+      <workItem from="1509097937802" duration="398000" />
     </task>
     <task id="LOCAL-00001" summary="access test2">
       <created>1508562593958</created>
@@ -357,10 +416,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71350000" />
+    <option name="totallyTimeSpent" value="74021000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="363" y="121" width="1389" height="877" extended-state="0" />
+    <frame x="12" y="1103" width="1389" height="877" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -377,7 +437,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3153527" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19821826" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20712695" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="JRebel" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -441,13 +501,123 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/JackCompiler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="23" column="32" lean-forward="false" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/domain/Symbol.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/domain/TokenType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="15" lean-forward="false" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/domain/VMEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="45" lean-forward="false" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/domain/Kind.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="12" lean-forward="false" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/domain/StringEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="17" column="43" lean-forward="false" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CompilationEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9018">
+          <caret line="501" column="45" lean-forward="false" selection-start-line="501" selection-start-column="45" selection-end-line="501" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JackCompiler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="23" column="32" lean-forward="false" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/domain/Symbol.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/domain/TokenType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="15" lean-forward="false" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/domain/VMEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="45" lean-forward="false" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/domain/Kind.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="12" lean-forward="false" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/domain/StringEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="17" column="43" lean-forward="false" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CompilationEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5616">
+          <caret line="312" column="19" lean-forward="false" selection-start-line="312" selection-start-column="19" selection-end-line="312" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/CompilationEngine.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18882">
           <caret line="1059" column="30" lean-forward="false" selection-start-line="1059" selection-start-column="30" selection-end-line="1059" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -462,9 +632,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19062">
           <caret line="1059" column="30" lean-forward="false" selection-start-line="1059" selection-start-column="30" selection-end-line="1059" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -479,9 +647,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -489,9 +655,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -499,9 +663,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -509,9 +671,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -519,9 +679,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -529,9 +687,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -574,9 +730,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -605,9 +759,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2214">
           <caret line="123" column="44" lean-forward="true" selection-start-line="123" selection-start-column="44" selection-end-line="123" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -633,27 +785,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/myenum/KeyWord.java" />
-    <entry file="file://$PROJECT_DIR$/src/domain/TokenType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="15" lean-forward="true" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/domain/Symbol.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/domain/Kind.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/src.zip!/java/util/Map.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -684,33 +815,56 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/JackCompiler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="18" column="52" lean-forward="false" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
+        <state relative-caret-position="378">
+          <caret line="23" column="32" lean-forward="false" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/domain/Symbol.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/domain/TokenType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="15" lean-forward="false" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/domain/VMEnum.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="39" lean-forward="false" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
+        <state relative-caret-position="126">
+          <caret line="7" column="45" lean-forward="false" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/domain/Kind.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="12" lean-forward="false" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/domain/StringEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="17" column="43" lean-forward="false" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CompilationEngine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="583" column="53" lean-forward="false" selection-start-line="583" selection-start-column="53" selection-end-line="583" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/domain/StringEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="610">
-          <caret line="43" column="29" lean-forward="true" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="29" />
+        <state relative-caret-position="143">
+          <caret line="1054" column="39" lean-forward="false" selection-start-line="1054" selection-start-column="39" selection-end-line="1054" selection-end-column="39" />
           <folding />
         </state>
       </provider>

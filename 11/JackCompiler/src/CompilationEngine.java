@@ -319,10 +319,10 @@ public class CompilationEngine {
          * function xx.xx nArgs
          * */
         vmWriter.writeFunction(this.thisFunName, symbolTable.varCount(Kind.VAR));
-        /**
-         * constructor allocate memory to new object
-         * */
         if (this.thisFunType.equals(KEYWORD_CONSTRUCTOR)) {
+            /**
+             * constructor allocate memory to new object
+             * */
             symbolTable.localAtClassScope();
 
             vmWriter.writePush(VMEnum.CONST, symbolTable.varCount(Kind.FIELD));
@@ -932,9 +932,6 @@ public class CompilationEngine {
                         /**
                          * push obj
                          * */
-//                        if (symbolTable.kindOf(nameLv1) != Kind.NONE) {
-//                            vmWriter.writePush(VMEnum.LOCAL, symbolTable.indexOf(nameLv1));
-//                        }
                         pushObj(nameLv1);
 
                         if (jackTokenizer.tokenType() == TokenType.SYMBOL && jackTokenizer.symbol().equals(")")) {
@@ -946,7 +943,6 @@ public class CompilationEngine {
                         //')'
                         write(wrapBySymbolTag(jackTokenizer.symbol()));
                         advance();
-
 
                         /**
                          *call xxx.xxx nArgs
@@ -1076,6 +1072,7 @@ public class CompilationEngine {
     }
 
     private void handleArray() {
+        /**handle arr**/
         vmWriter.writePop(VMEnum.TEMP, 0);
         vmWriter.writePop(VMEnum.POINTER,1);
         vmWriter.writePush(VMEnum.TEMP,0);
